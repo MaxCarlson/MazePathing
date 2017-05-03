@@ -43,7 +43,7 @@ public:
     
     
     void loadMap(){
-string tmp = "perfect4k.png";
+string tmp = "small.ppm";
 
 #ifndef debuggg 
 
@@ -77,7 +77,7 @@ string tmp = "perfect4k.png";
         char tmpB[4];
         
         memcpy(tmpB, info+16, 4);
-        int width = (tmpB[0]<<24) + (tmpB[1]<<16) + (tmpB[2]<<8) + (tmpB[3]<<0);//(int)strtol(tmpB, NULL, 16);
+        int width = (tmpB[0]<<24) + (tmpB[1]<<16) + (tmpB[2]<<8) + (tmpB[3]<<0);
         
         memcpy(tmpB, info+20, 4);
         int height = (tmpB[0]<<24) + (tmpB[1]<<16) + (tmpB[2]<<8) + (tmpB[3]<<0);
