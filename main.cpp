@@ -16,14 +16,16 @@
 #include <iostream>
 #include <stdlib.h>
 #include <string.h>
+#define cimg_display 0
+#include "CImg.h"
+
+
 
 #define debuggg
 
 
-
-
-
 using namespace std;
+using namespace cimg_library; 
 
 class Node {
     
@@ -34,7 +36,6 @@ class Node {
 class Map{
 public:
     
-    //vector<bool><bool>
     bool ** grid;
     
     Map(){
@@ -61,63 +62,33 @@ string tmp = "small.ppm";
             exit(0);
         } 
         
-        //int width;
-       // int height;
+        CImg<int> image("small.ppm");
         
-        //cout << "Input "
+        //get image width and height
+        int height = image.height();
+        int width = image.width();  
         
-        
-        
-        
-        //read header of file to get size
-        char info[54];
-        fread(info, sizeof(char), 54, pFile);
-        
-        //pixel width/height
-        char tmpB[4];
-        
-        memcpy(tmpB, info+16, 4);
-        int width = (tmpB[0]<<24) + (tmpB[1]<<16) + (tmpB[2]<<8) + (tmpB[3]<<0);
-        
-        memcpy(tmpB, info+20, 4);
-        int height = (tmpB[0]<<24) + (tmpB[1]<<16) + (tmpB[2]<<8) + (tmpB[3]<<0);
+        bool grid[width][height];
         
         
+        //x,y,depth,color coordinates of pixels
+        //R = 0 = black false : R255 = white true
+        bool pixvalR = image(0,0,0,0);
+        pixvalR = image(1,0,0,0);
+        bool pixelC;
         
         
-        
-     
-        //create an array of width size, each slot holds an array --below
-        grid = new bool *[width];
-        
-        //creates width number of arrays of height size
-        for(int i = 0; i < width; ++i){
-            grid[i] = new bool[height];
+        //seed grid[width][height] with true = white false = black
+        for(int i = 0; i < height; i++){
+            for(int j = 0; j < width; j++){
+                pixelC = image(i,j,0,0);
+                grid[j][i] = pixelC;
+            }
         }
         
-        int size = width*height;
-        
-        int pixelNum = 0;
-        //tmp = 0;
-        char bValue;
-        
-        //read data to grid from pFile;
-        for(int i = 0; i < size; i+=3){
-            fseek(pFile, i , 54);
-            fread(&bValue, sizeof(char), 1, pFile);
-            
-            //grid[pixelNum/width][pixelNum%height] = 
-            pixelNum += 1;
-        }   
+   
     }
     
-    
-    
-    
-
-
-
-
 };
 
 
