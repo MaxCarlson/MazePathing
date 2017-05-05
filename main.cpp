@@ -12,6 +12,7 @@
  */
 
 //#include <cstdlib>
+//#include <array>
 #include <stdio.h>
 #include <iostream>
 #include <stdlib.h>
@@ -21,7 +22,7 @@
 
 
 
-#define debuggg
+//#define debuggg
 
 
 using namespace std;
@@ -36,24 +37,28 @@ class Node {
 class Map{
 public:
     
-    bool ** grid;
+    //bool ** grid;
+    
+    //vector< vector<bool> > grid;
     
     Map(){
+        
         
     }
     
     
     void loadMap(){
-string tmp = "small.ppm";
+//string tmp = "small.ppm";
 
-#ifndef debuggg 
+//#ifndef debuggg 
 
-
+        
+//#endif        
+            
+        string tmp;
         cout << "Please give file name" << endl;
         cin >> tmp;
-        
-#endif        
-        
+    
         //create file object, read file object, check if null
         FILE* pFile;
         pFile = fopen(tmp.c_str(), "r");
@@ -62,14 +67,15 @@ string tmp = "small.ppm";
             exit(0);
         } 
         
-        CImg<int> image("small.ppm");
+        //initialize CImg image object
+        CImg<int> image(tmp.c_str());
         
         //get image width and height
         int height = image.height();
-        int width = image.width();  
+        int width = image.width();
         
+        //grid = new bool* [height];
         bool grid[width][height];
-        
         
         //x,y,depth,color coordinates of pixels
         //R = 0 = black false : R255 = white true
@@ -82,12 +88,20 @@ string tmp = "small.ppm";
         for(int i = 0; i < height; i++){
             for(int j = 0; j < width; j++){
                 pixelC = image(i,j,0,0);
-                grid[j][i] = pixelC;
+                grid[j][i] = (bool) pixelC;
             }
         }
+  
         
-   
+        
+        
+        
+        
+
+        
+        
     }
+    
     
 };
 
@@ -101,10 +115,14 @@ string tmp = "small.ppm";
  * 
  */
 int main(int argc, char** argv) {
+
     
     Map* newMap = new Map();
     
     newMap->loadMap();
+    
+    
+    //Map();
 
     return 0;
 }
