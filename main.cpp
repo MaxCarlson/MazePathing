@@ -91,15 +91,7 @@ public:
                 grid[j][i] = (bool) pixelC;
             }
         }
-  
-        
-        
-        
-        
-        
-
-        
-        
+   
     }
     
     
