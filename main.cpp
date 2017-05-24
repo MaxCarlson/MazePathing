@@ -89,6 +89,7 @@ public:
             for(int j = 0; j < width; j++){
                 pixelC = image(i,j,0,0);
                 grid[j][i] = (bool) pixelC;
+                //*(*(grid+j)+i) = (bool) pixelC;
             }
         }
    
